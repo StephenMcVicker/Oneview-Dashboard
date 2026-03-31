@@ -5,8 +5,13 @@ import { defineConfig } from 'vitest/config'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// GitHub Pages project URL: /repo-name/
+// https://vite.dev/config/shared-options.html#base
+const GH_PAGES_BASE = '/Oneview-Dashboard/'
+
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? GH_PAGES_BASE : '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -19,4 +24,4 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     css: true,
   },
-})
+}))
