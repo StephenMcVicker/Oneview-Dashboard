@@ -47,4 +47,5 @@ The goal was to keep state global and avoid prop drilling.
 The key here was to useRef, which lets us keep a mutable value between re-rendering to track the request id and only update the state if the refId and the refrequestid match. `requestIdRef` increases each time `execute` is called. Using `useState` here would cause extra re-renders and state update is batched and a bit delayed which could just cause bugs (like async issues) in general for me. Refs are ideal for tracking values outside of UI state renders like request tracking and timeouts.
 
 
-
+### Adding Debounce (20 mins)
+Patient search was firing the mock API on every keystroke, which is would be expensive against a real backend. I added a small `useDebounce` hook so the directory keeps the input responsive while `searchPatients` runs only after the user pauses typing (300ms). That matches how production search boxes usually behave and reuses the same debounce logic anywhere else in the app needs it.
