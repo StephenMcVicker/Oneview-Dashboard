@@ -43,4 +43,8 @@ The goal was to keep state global and avoid prop drilling.
 
 (Started this readme with that commit)
 
+### Fixing Race Condition in useAsync (25 mins)
+The key here was to useRef, which lets us keep a mutable value between re-rendering to track the request id and only update the state if the refId and the refrequestid match. `requestIdRef` increases each time `execute` is called. Using `useState` here would cause extra re-renders and state update is batched and a bit delayed which could just cause bugs (like async issues) in general for me. Refs are ideal for tracking values outside of UI state renders like request tracking and timeouts.
+
+
 

@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 
 type AsyncState<T> = {
-  data: T| null
+  data: T | null
   error: Error | null
   loading: boolean
 }
@@ -15,21 +15,38 @@ export function useAsync<T, Args extends unknown[]>(
     loading: false,
   })
 
+  const requestIdRef = useRef(0)
+
   const execute = useCallback(async (...args: Args) => {
-    setState({ data: null, error: null, loading: true })
+    const requestId = ++requestIdRef.current
+
+    setState((prev) => ({
+      ...prev,
+      loading: true,
+      error: null,
+    }))
+
     try {
-      const results = await asyncFn(...args)
-      setState(
-        { data: results,
+      const result = await asyncFn(...args)
+
+      if (requestId === requestIdRef.current) {
+        setState({
+          data: result,
           error: null,
-          loading: false }
-      )
-      return results
+          loading: false,
+        })
+      }
+
+      return result
     } catch (error) {
-      setState(
-        { data: null,
+      if (requestId === requestIdRef.current) {
+        setState({
+          data: null,
           error: error as Error,
-          loading: false })
+          loading: false,
+        })
+      }
+
       throw error
     }
   }, [asyncFn])
