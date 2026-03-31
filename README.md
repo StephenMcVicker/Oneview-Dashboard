@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# Oneview Healthcare Interview Prep - Mock Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**By Stephen McVicker**
 
-Currently, two official plugins are available:
+## Overview
+To prepare for the interview with Oneview Healthcare, I created this react project to render out a patient dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Prerequisites
 
-## React Compiler
+If you don't have Bun installed, install it first:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+curl -fsSL https://bun.sh/install | bash
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the Application
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Navigate to the project directory:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+bun install
 ```
+
+3. Start the development server:
+```bash
+bun dev
+```
+
+The application will be available at `http://localhost:5173/`
+
+## My Development Process
+
+### Getting Started (1 hour 15 minutes)
+
+I set up the react project using vite and installed Tailwind (styling) and Zustand (state management) and then started working on folder structure and files. This was to get a sense of the project. Github init and my first initial commit. I used a hand written notepad to track my progress and aid in writing this README.
+
+I set up pre-commit hooks using **Husky**. I want to ensure every commit is linted and type-checked automatically. It's just good practice and saves headaches later.
+
+In the email from Aoife, the first point listed on tips for the interview was `writing type-safe React hooks from scratch` - so I had a plan to start of creating a `useAsync` hook that I would use to get patients from a mock api. I created my `patient.ts` typing, created this file, and using it in a basic component.
+Once working, I used Cursor's AI Agent to help me break up the components into smaller files which created the `PatientDirectory` and the smaller components based on my original one.
+The goal was to keep state global and avoid prop drilling.
+
+(Started this readme with that commit)
+
+
