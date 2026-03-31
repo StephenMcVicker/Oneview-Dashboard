@@ -49,3 +49,10 @@ The key here was to useRef, which lets us keep a mutable value between re-render
 
 ### Adding Debounce (20 mins)
 Patient search was firing the mock API on every keystroke, which is would be expensive against a real backend. I added a small `useDebounce` hook so the directory keeps the input responsive while `searchPatients` runs only after the user pauses typing (300ms). That matches how production search boxes usually behave and reuses the same debounce logic anywhere else in the app needs it.
+
+
+### Adding Testing (10 mins)
+Testing is an area I don't have much experience in - we didn't do too much of it in my last company. I have experience with Cypress end to end testing but not with writing tests for functions. I relied on AI to help me build this. I can see the value it would add to some hooks but I'm not too sure of the value added for the small hook like the debounce. This is an area I can grow in and am aware this role will require good testing so this could be a focus for me to improve my skills.
+
+### Conclusion
+This project was to help showcase my abilities and also refresh my memory on various aspects of a project before the interview. I was open and honest with my timing and use of AI. I tracked everything on a notepad and tried to document my thought process and how I approached this. Styling and UX could be greatly improved and more details could have been added but I started this the evening before the interview and wanted to focus on project structure, reusable hooks, and laying UI and data.
